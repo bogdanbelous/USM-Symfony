@@ -1,0 +1,33 @@
+{% extends('base.html.twig') %}
+
+{% block title %}Cautarea{% endblock %}
+
+{% block body %}
+
+  <h2 class="text-center mb-5">Alege genul de filme pentru cautare</h2>
+
+  {#
+  <form class="w-50 mx-auto">
+    <select class="form-control">
+      {% for genre in genres %}
+      <option value="{{genre.id}}">{{genre.name}}</option>
+      {% endfor %}
+    </select>
+
+    <div class="text-center mt-3">
+      <a class="btn btn-success" href="{{path('index')}}">Cauta</a>
+    </div>
+  </form>
+  #}
+
+  <div class="text-center">
+  {% for genre in genres %}
+    <a class="btn btn-info" href="{{path('search_genre',{id:genre.id})}}">{{genre.name}}</a>
+  {% endfor %}
+  </div>
+
+  <div class="text-center mt-3">
+    <a class="btn btn-primary" href="{{path('index')}}">Inapoi</a>
+  </div>
+  
+{% endblock %}

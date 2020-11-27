@@ -1,0 +1,46 @@
+{% extends('base.html.twig') %}
+
+{% block body %}
+
+    <h2 class="text-center mb-5">{% block header %}Lista filmelor{% endblock %}</h2>
+    
+    {% for message in app.flashes('success') %} 
+      <div class="alert alert-success">
+        {{ message }}
+      </div>
+    {% endfor %}
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Denumirea</th>
+          <th>Gen</th>
+          <th>Premiera</th>
+          <th><div class="d-flex justify-content-center">Optiuni</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for movie in movies %}
+        <tr>
+          <td><a href="{{path('info_movie',{id:movie.id})}}">{{movie.id}}</a></td>
+          <td>{{movie.name}}</td>
+          <td>{{movie.genre.name}}</td>
+          <td>{{movie.premiere|date("m/d/Y")}}</td>
+          <td>
+            <div class="d-flex justify-content-around">
+              <a href="{{path('edit_movie',{id:movie.id})}}">Modifica</a>
+              <a class="text-danger" href="{{path('delete_movie',{id:movie.id})}}">Sterge</a>
+            </div>
+          </td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+    
+    <div class="text-center">
+      <a class="btn btn-primary" href="{{ path('add_movie') }}" role="button">Adauga</a>
+      <a class="btn btn-info" href="{{ path('search') }}" role="button">Cauta</a>
+    </div>
+
+{% endblock %}
